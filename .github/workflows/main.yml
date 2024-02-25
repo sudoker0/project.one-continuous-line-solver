@@ -1,0 +1,63 @@
+name: "Main"
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  actions: write
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.JS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Compile code
+        run: node build.mjs
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: compiled-files-2
+          path: dist/
+
+  deploy-site:
+    needs: compile
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: compiled-files-2
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
