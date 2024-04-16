@@ -219,9 +219,7 @@ function compileTSFile(path, confFilePath) {
         const confContent = readFileSync(confFilePath, 'utf8')
         const tsConfig = JSON.parse(confContent)
 
-        const content = typescript.transpileModule(sourceContent, {
-            compilerOptions: tsConfig
-        })
+        const content = typescript.transpileModule(sourceContent, tsConfig)
 
         writeFileSync(
             `${p.dir}${p.dir == "" ? "" : pathSeparator}${p.base.replace(TS_FILE, ".js")}`,

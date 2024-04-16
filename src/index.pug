@@ -3,6 +3,50 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
+        title One Continuous Line puzzle solver
+        link(rel="stylesheet", href="./style/style.css")
     body
-        p This is just a template.
+        canvas#canvas
+        #control.off
+            h1 One Continuous Line puzzle solver
+            p Solve the drawing game where you have to draw a shape through a number of points without lifting the pencil once.
+            hr
+            details
+                summary: u How to draw on canvas?
+                ul
+                    li Left-click on an empty space to create a new node, or left-click on an already created node, then drag from the node, and a line should be created. Drag the end of the line to where you want to place the second node, and let go.
+                    li Left-click on a node ONLY to enter dragging mode (the node should turn blue), then you can drag the node to anywhere you want. Left-click on the selected node again to exit dragging node.
+                    li Right-click on a node to delete it, alongside any line that connect to the deleted node.
+            hr
+            p: u Options:
+            label(for="num_of_answers")
+                span Number of answers: 
+                input#num_of_answers(type="text", name="num_of_answers", value="1")
+            button#solve Solve!
+            button#clear_all Clear All
+            hr
+            p: u Solutions found:
+            p#solutions_cnt
+            #solutions
+            hr
+            details
+                summary: u About
+                ul
+                    li This is my first ever project that involves the use of WASM (WebAssembly) for the processing.
+                    li The WASM file was compiled from Rust, you can find the source #[a(href="https://github.com/sudoker0/one-continuous-line-wasm") here].
+                    li Copyright 2024 sudoker0. Licensed under the MIT license.
+
+        button#control_button
+            <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 7L4 7" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M20 12L4 12" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M20 17L4 17" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+
+        #initializing.overlay.opaque
+            .wrapper
+                h1 Initializing, please wait.
+        #solving.overlay.hidden
+            .wrapper
+                h1 Now solving, please wait.
+    script(src="./script/script.js")

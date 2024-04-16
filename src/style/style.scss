@@ -1,0 +1,135 @@
+@font-face {
+    font-family: "Noto Sans Mono";
+    src: url("../fonts/NotoSansMono.ttf");
+}
+
+* {
+    font-family: "Noto Sans Mono", monospace;
+    box-sizing: border-box;
+    color: white;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+
+canvas {
+    margin: 0;
+}
+
+h1 {
+    margin: 8px 0;
+}
+
+p {
+    margin: 0;
+}
+
+hr {
+    width: 100%;
+}
+
+#control {
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-width: 500px;
+    height: 100%;
+    background-color: rgb(64, 64, 64, 0.6);
+    padding: 16px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: auto;
+    transition: transform 0.2s;
+
+    &.off {
+        transform: translateX(100%);
+    }
+}
+
+#control_button {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    width: 48px;
+    height: 48px;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(64, 64, 64, 0.6);
+    z-index: 2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: opacity 0.2s;
+    text-align: center;
+
+    &.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &.opaque {
+        background-color: black;
+    }
+}
+
+button {
+    width: fit-content;
+    font-size: 1rem;
+    border: 2px solid white;
+    background-color: white;
+    color: black;
+    box-shadow: 4px 4px 0px 0px rgba(200,200,200,0.75);
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:active {
+        transform: scale(0.9);
+    }
+}
+
+input {
+    border: 2px solid white;
+    background-color: white;
+    color: black;
+    box-shadow: 4px 4px 0px 0px rgba(200,200,200,0.75);
+}
+
+hr {
+    border: 2px solid white;
+}
+
+summary {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+li {
+    margin: 4px 0;
+}
+
+a {
+    color: rgb(160, 160, 160)
+}
